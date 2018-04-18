@@ -1,0 +1,45 @@
+body {
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+header {
+    text-align: center;
+    border: 1px solid maroon;
+    background-color: maroon;
+    color: white;
+    font-family: 'Comic Sans MS';
+}
+
+form {
+    margin: 0 auto;
+    text-align: center;
+}
+
+button {
+    background-color: maroon;
+    color: white;
+    border-radius: 7px;
+}
+
+#button-container {
+    display: inline;
+}
+
+#file-container {
+    display: inline-block;
+}
+
+#myFile {
+    width: 160px;
+}
+
+img {
+    object-fit: cover;
+    width: 400px;
+    height: 400px;
+    margin: 0px 50px 0px 50px;
+    /*object-fit: cover;*/
+    text-align: center;
+}

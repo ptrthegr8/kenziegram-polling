@@ -1,0 +1,23 @@
+DOCTYPE
+html
+
+head
+    title= KenzieGram
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet" href="main.css" type="text/css")
+body
+    header
+        h1= 'KenzieGram'
+    form(action="/upload", method="POST", enctype="multipart/form-data")
+        fieldset
+            legend= 'ʕ•ᴥ•ʔ'
+            div(id="file-container")
+                input(type="file", name="myFile", id="myFile")
+            span= '(~˘▾˘)~'
+            div(id="button-container")
+                button= 'Upload'
+    each image in images
+        img(src= `uploads/${image}`)
+        
+        
+   
