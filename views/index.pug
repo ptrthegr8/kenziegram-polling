@@ -16,8 +16,9 @@ body
             span= '(~˘▾˘)~'
             div(id="button-container")
                 button= 'Upload'
-    each image in images
-        img(src= `uploads/${image}`)
+    div(id="img-container")
+        each image in images
+            img(src= `uploads/${image}`)
     script
       include index.js
         

@@ -7,7 +7,7 @@ const upload = multer({
 });
 app.set('view engine', 'pug');
 
-const items = [];
+const items = [{"timestamp": 0}];
 // 
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
@@ -23,25 +23,6 @@ app.get('/', (req, res) => {
         });
     });
 });
-// GET latest
-app.get('/latest', (req, res) => {
-    fs.readdir('./', function (err, items) {
-        res.send("test");
-    });
-})
-// POST latest
-app.post('/latest', (req, res) => {
-    let mostRecent = {
-        'images': [],
-        'timestamp': Date.now()
-    };
-
-    fs.readdir('./public/latest', function (err, items) {
-        // var modified = fs.statSync(imagePath).mtimeMs;
-        // if (modified > after) {};
-        res.send(mostRecent);
-    });
-});
 // POST
 app.post('/upload', upload.single('myFile'), function (req, res, next) {
     // req.file is the `myFile` file
@@ -54,6 +35,21 @@ app.post('/upload', upload.single('myFile'), function (req, res, next) {
     res.render('upload-screen', {
         image: req.file.filename
     });
+    res.end()
 });
-
+// POST latest
+app.post('/latest', (req, res) => {
+    let mostRecent = {
+        'images': [],
+        'timestamp': Date.now()
+    };
+    for (let i = 0; i < items.length; i++) {
+        // if (items[i].timestamp > items[i-1].timestamp) {
+        //     mostRecent.images.push(items[i].image);
+        // }
+        mostRecent.images.push(items[i].image);
+    };
+    res.send(mostRecent);
+});
+//
 app.listen(3000, () => console.log(`http://localhost:3000/`));
