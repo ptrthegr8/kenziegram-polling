@@ -13,9 +13,9 @@ function fetchPics() {
     };
     fetch("/latest", postRequestOptions)
         .then(response => response.json())
-        .then(data => {
-            for (let i = 0; i < data.images.length; i++) {
-                document.getElementById("img-container").innerHTML += `<img src='uploads/${data.images[i]}'>`;
+        .then(items => {
+            for (let i = 0; i < items.length; i++) {
+                document.getElementById("img-container").innerHTML += `<img src='uploads/${items[i]}'>`;
             }
             timeStamp = Date.now();
             setTimeout(fetchPics, 5000);
@@ -24,7 +24,7 @@ function fetchPics() {
         console.log(error)
         errorCount++;
         if (errorCount > 1) {
-            document.body.innerHTML="Sorry! The server is not working right meow."
+            document.body.innerHTML= "Sorry! Not working right meow."
         }
         })
 }; 
