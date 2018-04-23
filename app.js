@@ -7,19 +7,20 @@ const upload = multer({
 });
 app.set('view engine', 'pug');
 
-const items = [{"timestamp": 0}];
+let items = [];
 // 
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
 
 // GET
-app.get('/', (req, res) => {
-    fs.readdir('./public/uploads', function (err, items) {
+app.get('/', (req, res, next) => {
+    fs.readdir('./public/uploads/', function (err, items) {
         // console.log(items);
         res.render('index', {
             title: 'KenzieGram',
-            images: items
+            images: items,
+            after: fs.statSync('./public/uploads/' + items[0]).mtime.getTime()
         });
     });
 });
@@ -35,19 +36,17 @@ app.post('/upload', upload.single('myFile'), function (req, res, next) {
     res.render('upload-screen', {
         image: req.file.filename
     });
-    res.end()
 });
 // POST latest
-app.post('/latest', (req, res) => {
+app.post('/latest', (req, res, next) => {
     let mostRecent = {
         'images': [],
         'timestamp': Date.now()
     };
     for (let i = 0; i < items.length; i++) {
-        // if (items[i].timestamp > items[i-1].timestamp) {
-        //     mostRecent.images.push(items[i].image);
-        // }
-        mostRecent.images.push(items[i].image);
+        if (items[i].timestamp > req.body.after) {
+            mostRecent.images.push(items[i].image);
+        }
     };
     res.send(mostRecent);
 });
