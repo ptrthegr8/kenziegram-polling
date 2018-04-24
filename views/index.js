@@ -14,10 +14,10 @@ function fetchPics() {
     fetch("/latest", postRequestOptions)
         .then(response => response.json())
         .then(items => {
-            for (let i = 0; i < items.length; i++) {
-                document.getElementById("img-container").innerHTML += `<img src='uploads/${items[i]}'>`;
+            for (let i = 0; i < items.images.length; i++) {
+                document.getElementById("img-container").innerHTML += `<img src='uploads/${items.images[i]}'>`;
             }
-            timeStamp = Date.now();
+            timeStamp = items.timestamp;
             setTimeout(fetchPics, 5000);
         })
         .catch(error => {
@@ -28,4 +28,4 @@ function fetchPics() {
         }
         })
 }; 
-fetchPics();
+setTimeout(fetchPics, 5000);
