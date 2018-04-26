@@ -46,6 +46,7 @@ app.post('/latest', (req, res, next) => {
             images: mostRecent,
             timestamp: mostRecent.length ? fs.statSync(`${path}/${mostRecent[0]}`).mtimeMs : req.body.after
         })
+        mostRecent = [];
     });
 });
 // Listens for server
