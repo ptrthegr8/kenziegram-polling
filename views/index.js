@@ -25,6 +25,8 @@ function fetchPics() {
         errorCount++;
         if (errorCount > 1) {
             document.body.innerHTML= "Sorry! Not working right meow."
+        } else {
+            setTimeout(fetchPics, 5000);
         }
         })
 }; 
